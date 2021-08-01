@@ -39,7 +39,7 @@ class _SearchDrinkScreenState extends State<SearchDrinkScreen> {
         builder: (context) {
           return AlertDialog(
             backgroundColor: Colors.brown[50],
-            content: Text('Meal saved to favorites!'),
+            content: Text('Drink saved to favorites!'),
             actions: [
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
@@ -131,27 +131,16 @@ class _SearchDrinkScreenState extends State<SearchDrinkScreen> {
                                         ),
                                       ),
                                       IconButton(
-                                        // highlightColor: Colors.red,
-                                        // hoverColor: Colors.green,
-                                        // focusColor: Colors.purple,
                                         splashColor: Colors.purple,
-                                        // disabledColor: Colors.amber,
-                                        // color: Colors.red,
                                         color: Colors.red,
                                         iconSize: 35,
                                         onPressed: () {
                                           setState(() {
                                             buttonSelected = 2;
                                             trappingDialog(context);
-                                            // Text(
-                                            //   'View Instructions here',
-                                            //   style: TextStyle(
-                                            //     fontSize: 16,
-                                            //   ),
-                                            // );
                                           });
 
-                                          Map<String, dynamic> mealId = {
+                                          Map<String, dynamic> drinkId = {
                                             "id": snapshot.data.drinks[index]
                                                 ['idDrink'],
                                             "name": snapshot.data.drinks[index]
@@ -160,7 +149,7 @@ class _SearchDrinkScreenState extends State<SearchDrinkScreen> {
                                                 ['strDrinkThumb'],
                                           };
                                           databaseMethods.addFavorites(
-                                              Constants.email, 'meals', mealId);
+                                              Constants.email, 'drinks', drinkId);
                                         },
                                         icon: new Icon(
                                           Icons.bookmark_border_sharp,

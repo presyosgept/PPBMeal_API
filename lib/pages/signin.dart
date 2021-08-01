@@ -31,26 +31,33 @@ class _SignInState extends State<SignIn> {
   QuerySnapshot snapshotUserInfo;
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
-
+  int flag = 0;
   singIn() async {
     String username;
+    flag = 0;
+    log("sdfsfse");
     if (formKey.currentState.validate()) {
+      log("1");
       HelperFunctions.saveUserEmailSharedPreference(
           emailEditingController.text);
+      log("2");
+      log(emailEditingController.text);
       Constants.email = emailEditingController.text;
+      log("g" + emailEditingController.text);
       databaseMethods
           .getUserbyUserEmail(emailEditingController.text)
           .then((result) {
         snapshotUserInfo = result;
+        log("o" + emailEditingController.text);
+        print(flag.toString);
         username = snapshotUserInfo.docs[0].data()["name"];
-        log(username);
+        log("e" + emailEditingController.text);
         HelperFunctions.saveUserNameSharedPreference(
             snapshotUserInfo.docs[0].data()["name"]);
-
-        print("last" + username);
       });
       setState(() {
-        isLoading = true;
+        log("we" + emailEditingController.text);
+        
       });
 
       await authMethods
@@ -58,13 +65,19 @@ class _SignInState extends State<SignIn> {
               emailEditingController.text, passwordEditingController.text)
           .then((result) {
         if (result != null) {
+          log("dzaaa" + emailEditingController.text);
           HelperFunctions.saveUserLoggedInSharedPreference(true);
           setState(() {
-            //username= snapshotUserInfo.docs[0].data()["name"];
+            isLoading = true;
+            flag = 1;
           });
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Home()));
           print(username);
+        } else {
+         setState(() {
+            flag = 1;
+          });
         }
       });
     }
@@ -85,12 +98,14 @@ class _SignInState extends State<SignIn> {
           )),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: isLoading
+            child: isLoading && flag == 1
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(
+                            child: CircularProgressIndicator()
+                               ),
                       ),
                       Text("Wait For A While", style: biggerTextStyle())
                     ],
@@ -191,31 +206,59 @@ class _SignInState extends State<SignIn> {
                         SizedBox(
                           height: 16,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have account? ",
-                              style: simpleTextStyle(),
+                       flag == 0
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Don't have account? ",
+                                    style: simpleTextStyle(),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      widget.toggle();
+                                    },
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 8),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "Register Now",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                decoration:
+                                                    TextDecoration.underline),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10.0)
+                                ],
+                              )
+                            : Row(
+                              children: [
+                                 Text(
+                                    "Account not found",
+                                    style: simpleTextStyle(),
+                                  ),
+                                GestureDetector(
+                                    onTap: () {
+                                      widget.toggle();
+                                    },
+                                    child:  Text(
+                                            "Register Now",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                decoration:
+                                                    TextDecoration.underline),
+                                          ),
+                                  ),
+                              ],
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                widget.toggle();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  "Register Now",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      decoration: TextDecoration.underline),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10.0)
-                          ],
-                        ),
                       ],
                     ),
                   ),

@@ -52,6 +52,7 @@ class _HomeState extends State<Home> {
         title: Text("Home"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ClipRRect(
             child: Padding(

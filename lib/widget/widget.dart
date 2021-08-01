@@ -5,7 +5,7 @@ TextStyle simpleTextStyle() {
 }
 
 TextStyle biggerTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 20);
+  return TextStyle(color: Colors.black, fontSize: 20);
 }
 
 InputDecoration textFieldInputDecoration(String hintText) {

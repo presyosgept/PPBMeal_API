@@ -100,11 +100,7 @@ class FavoriteMealState extends State<FavoriteMeal> {
                       ),
                     );
                   })
-              : Container();
-          // return Container(
-          //   color: Colors.white,
-          //   child: Text(listFaveMeal[0].toString()),
-          // );
+              :  Container(child:Text("No favorites meals yet"));
         });
   }
 

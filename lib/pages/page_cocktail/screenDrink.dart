@@ -64,29 +64,13 @@ class _ScreenDrinkState extends State<ScreenDrink> {
                                 Container(
                                   height: 100,
                                   width: 50,
-                                  // child: ClipOval(
-
-                                  //   child: Text(drinkCateg.strCategory[0],
-                                  //   ),
-
-                                  // ),
+                                
                                   child: CircleAvatar(
                                     backgroundColor: Colors.red,
                                     child: Text(drinkCateg.strCategory[0]),
                                   ),
                                 ),
-                                // Card(
-                                //   clipBehavior: Clip.antiAlias,
-                                //   shape: RoundedRectangleBorder(
-                                //     borderRadius: BorderRadius.circular(24),
-                                //   ),
-                                //   child: AspectRatio(
-                                //       aspectRatio: 1,
-                                //       child: Image.network(
-                                //         drinkCateg.strCategoryThumb,
-                                //         fit: BoxFit.cover,
-                                //       )),
-                                // ),
+                          
                                 SizedBox(width: 16),
                                 Flexible(
                                   child: Column(
@@ -100,11 +84,7 @@ class _ScreenDrinkState extends State<ScreenDrink> {
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      // Text(
-                                      //   drinkCateg.strCategory,
-                                      //   maxLines: 2,
-                                      //   overflow: TextOverflow.ellipsis,
-                                      // ),
+                                  
                                     ],
                                   ),
                                 ),
